@@ -5,6 +5,8 @@ require_once __DIR__.'/../src/AppController.php';
 require_once __DIR__.'/../src/PostController.php';
 
 $app = new Silex\Application();
+$app['debug'] = true;
+
 //Register providers
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
@@ -14,6 +16,10 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
         'password' => 'usbw',
         'port'     => 3307,
     ),
+));
+
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => __DIR__.'/../views',
 ));
 
 $app->get('/', 'AppController::indexAction');

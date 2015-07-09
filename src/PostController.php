@@ -16,8 +16,10 @@ class PostController
         $conn =  $app['db'];
         $post = $conn->fetchAssoc("SELECT * FROM posts WHERE id = ?", array((int) $id));
 
-        print_r($post);
+//        print_r($post);
 
-        return 'Post '. $id;
+        return $app['twig']->render('post/shwo.twig', array (
+            'post' => $post,
+        ));
     }
 }
